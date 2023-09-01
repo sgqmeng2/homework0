@@ -1,0 +1,67 @@
+---
+title: "homework0"
+author: "sgqmeng2"
+format: html
+editor: visual
+---
+
+In this report, we will solve the quadratic equation f(x) = ax^2 + bx + c = 0 for the given coefficients a = 1, b = 3, and c = 2. We will then include a plot to confirm the result. If a, b, c are changed, we will also get the correct result.
+
+## Equation
+ax^2 + bx + c = 0
+
+## Solution
+```{r}
+#| echo: false
+
+# Parametric
+a <- 1 
+b <- 3
+c <- 2
+
+if (b^2-4*a*c > 0){# Two roots
+  
+  root1 <- (-b-sqrt(b^2-4*a*c))/(2*a)
+  root2 <- (-b+sqrt(b^2-4*a*c))/(2*a)
+  
+  print(paste("The quadratic equation has two solutions:","x1 =",root1,", x2 =",root2,"when a =",a, "b =",b,"c =",c))
+  
+}else if(b^2-4*a*c == 0){# One root
+  
+  root <- (-b/(2*a))  
+  
+  print(paste("The quadratic equation has one solution:","x =",root,"when a =",a, "b =",b,"c =",c))
+  
+}else{# No root
+  
+  print(paste("The quadratic equation has no solution","when a =",a, "b =",b,"c =",c))
+  
+}
+
+```
+
+## Equation plotting 
+
+```{r}
+#| echo: false
+if (b^2-4*a*c > 0){# Two roots plotting
+  
+  x <- seq(2*root1 - root2, 2*root2 - root1, length = 300)
+  plot(x, a*x^2 + b*x + c, type = "l")
+  abline(h = 0, lty = 2)
+  
+}else if(b^2-4*a*c == 0){# One root plotting
+  
+  x <- seq(root - 5, root + 5, length = 300)
+  plot(x, a*x^2 + b*x + c, type = "l")
+  abline(h = 0, lty = 2)
+  
+}else{# No root plotting
+  
+  x <- seq(-b/(2*a) - 5, -b/(2*a) + 5, length = 300)
+  plot(x, a*x^2 + b*x + c, type = "l")
+  abline(h = 0, lty = 2)
+  
+}
+
+```
